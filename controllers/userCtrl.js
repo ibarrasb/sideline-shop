@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const userCtrl = {
-    
+
 register: async(req,res) => {
         try{
             const{name, email, password} = req.body;
@@ -95,9 +95,12 @@ refreshToken: (req, res) => {
 },
 getUser: async(req, res) => {
     try {
-        const user = await Users.findById(req.user.id)
+        //removes password from being showed in response 
+        const user = await Users.findById(req.user.id).select('-password')
         if(!user) return res.status(400).json({"msg": "User does not exist. "})
-        res.json(req.user)
+
+
+        res.json(user)
     } catch (error) {
         res.status(500).json({msg: error.msg})
     }
