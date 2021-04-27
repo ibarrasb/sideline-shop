@@ -4,7 +4,8 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const userCtrl = {
- register: async(req,res) => {
+    
+register: async(req,res) => {
         try{
             const{name, email, password} = req.body;
 
@@ -37,7 +38,7 @@ const userCtrl = {
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
-    }, 
+}, 
 login: async (req, res) => {
         try {
             const {email, password} = req.body;
@@ -63,7 +64,7 @@ login: async (req, res) => {
             return res.status(500).json({msg: err.message})
         }
 
-    },
+},
 logout: async (req, res) => {
 try {
     res.clearCookie('refreshtoken', {path: '/user/refresh_token'})
@@ -72,7 +73,7 @@ try {
 } catch (error) {
     return res.status(500).json({msg: err.message})
 }
- },
+},
 refreshToken: (req, res) => {
         try {
         const rf_token = req.cookies.refreshtoken;
@@ -91,7 +92,16 @@ refreshToken: (req, res) => {
         }
         
 
+},
+getUser: async(req, res) => {
+    try {
+        const user = await Users.findById(req.user.id)
+        if(!user) return res.status(400).json({"msg": "User does not exist. "})
+        res.json(req.user)
+    } catch (error) {
+        res.status(500).json({msg: error.msg})
     }
+}
     
 }
 const createAccessToken = (user) =>{
