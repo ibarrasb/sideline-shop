@@ -3,6 +3,9 @@ const cloudinary = require('cloudinary')
 const auth = require('../middleware/auth')
 const authAdmin = require('../middleware/authAdmin')
 
+//Cloudinary Picture uploader
+
+
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUD_API_KEY,
@@ -29,7 +32,6 @@ router.post("/upload", (req, res) => {
         
     } catch (err) {
         res.status(500).json({msg: err.message})
-        
     }
 })
 
