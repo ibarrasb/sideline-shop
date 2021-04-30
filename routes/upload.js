@@ -3,15 +3,15 @@ const cloudinary = require('cloudinary')
 const auth = require('../middleware/auth')
 const authAdmin = require('../middleware/authAdmin')
 const fs = require('fs')
+
+
 //Cloudinary Picture uploader
-
-
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUD_API_KEY,
     api_secret: process.env.CLOUD_API_SECRET
 })
-
+// "/upload", auth, authAdmin, (req, res)
 router.post("/upload", (req, res) => {
     try {
         
@@ -42,6 +42,22 @@ router.post("/upload", (req, res) => {
     } catch (err) {
         res.status(500).json({msg: err.message})
     }
+})
+
+router.post('/destroy', (req,res) =>{
+    try {
+         const {public_id} = req.body;
+    if(!public_id) return res.status(400).json({msg:'No images selected.'})
+
+    cloudinary.v2.uploader.destroy(public_id, async(err, result) =>{
+        if(err) throw err
+        res.json({msg: 'Image deleted. '})
+    })
+    } catch (err) {
+        res.status(500).json({msg: err.message})
+    }
+   
+
 })
 
 const removeTmp = (path) => {
