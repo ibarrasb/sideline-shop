@@ -1,11 +1,37 @@
 const Products = require('../models/productModel')
+class APIfeatures {
+    constructor(query, queryString){
+        this.query = query;
+        this.queryString = queryString;
+    }
+    filtering(){
+        const queryObj = {...this.queryString} //this.queryString = req.query
+        console.log({before: queryObj}) // before deleting
+        const excludedFields = ['page', 'sort', 'limit']
+        excludedFields.forEach(el => delete(queryObj[el]))
+
+        console.log({after: queryObj}) // after deleting 
+
+        let queryStr = JSON.stringify(queryObj)
+        console.log({queryObj, queryStr})
+
+        return this;
+    }
+
+    sorting(){}
+
+    paginating(){}
+}
 
 const productCtrl = {
     
 getProducts: async(req, res) => {
 try {
-    const product = await Products.find()
-    res.json(product)
+    
+    const features = new APIfeatures(Products.find(), req.query).filtering()
+
+    const products = await features.query
+    res.json(products)
 } catch (err) {
     return res.status(400).json({msg: err.message})
     
