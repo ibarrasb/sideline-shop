@@ -1,4 +1,6 @@
 const Products = require('../models/productModel')
+
+//Filtering, Sorting, and Paginating features to API
 class APIfeatures {
     constructor(query, queryString){
         this.query = query;
@@ -82,10 +84,10 @@ try {
 
             
 } catch (err) {
-    return res.status(400).json({msg: err.message})
-            
+
+    return res.status(400).json({msg: err.message})   
+    
         }
-        
     },
 deleteProducts: async(req, res) => {
 try {
