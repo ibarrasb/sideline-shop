@@ -53,15 +53,13 @@ try {
 
     const products = await features.query
     res.json({
-        status: 'sucess',
+        status: 'success',
         result: products.length,
         products: products
     })
 } catch (err) {
-    return res.status(400).json({msg: err.message})
-    
+    return res.status(400).json({msg: err.message})  
 }
-
     },
 createProducts: async(req, res) => {
 try {
