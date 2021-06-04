@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {GlobalState} from '../../../GlobalState'
 import ProductItem from '../utils/productitem/ProductItem'
 import './products.css'
+import Loading from '../utils/loading/Loading'
 
 function Products() {
     const state = useContext(GlobalState)
@@ -9,6 +10,7 @@ function Products() {
 
     console.log(products)
     return (
+        <>
         <div className="products">
             {
                 products.map(product => {
@@ -16,6 +18,10 @@ function Products() {
                 })
             }
         </div>
+        
+        {products.length === 0 && <Loading/>}
+
+        </>
     );
 }
 
