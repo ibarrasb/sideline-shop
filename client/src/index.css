@@ -78,3 +78,7 @@ header ul li:hover{
   font-size: 10px;
 
 }
+
+ul {
+  display: inline-flex;
+}
