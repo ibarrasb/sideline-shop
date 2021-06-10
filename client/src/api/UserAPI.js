@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import axios from 'axios'
 
 function UserAPI(token) {
@@ -35,13 +35,15 @@ function UserAPI(token) {
         if(check){
             setCart([...cart, {...product, quantity: 1}])
         }else{
-            alert("This product has been added to cart ")
+            alert("This product has already been added to cart ")
         }
     }
 
     return {
         isLogged: [isLogged, setIsLogged],
-        isAdmin: [isAdmin, setIsAdmin]
+        isAdmin: [isAdmin, setIsAdmin],
+        cart: [cart, setCart],
+        addCart: addCart
 
     }
 }

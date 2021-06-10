@@ -4,8 +4,9 @@ import {GlobalState} from '../../../../GlobalState'
 
 function BtnRender({product}) {
     const state = useContext(GlobalState)
-
     const [isAdmin] = state.UserAPI.isAdmin
+    const addCart = state.UserAPI.addCart
+
     return (
         <div className="row-btn">
         {
@@ -19,7 +20,7 @@ function BtnRender({product}) {
                 </Link>
             </div>
             : <div>
-                <Link id="btn-buy" to="#!">
+                <Link id="btn-buy" to="#!" onClick={ () => addCart(product)}>
                     Buy
                 </Link>
                 <Link id="btn-view" to={`/detail/${product._id}`}>
