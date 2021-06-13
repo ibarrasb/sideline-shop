@@ -109,7 +109,7 @@ getUser: async(req, res) => {
 addCart: async(req, res) => {
     try {
         const user = await Users.findById(req.user.id)
-        console.log("HERE2: " + req.user.id)
+
         if(!user) return res.status(400).json({msg: "User does not exist"})
 
         await Users.findOneAndUpdate({_id: req.user.id}, {

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {GlobalState} from '../../../GlobalState'
 import {Link} from 'react-router-dom'
 import './Cart.css'
@@ -8,6 +8,20 @@ function Cart() {
     const state = useContext(GlobalState)
     const cart = state.UserAPI.cart
     const [total, setTotal] = useState(0)
+
+    useEffect(() => {
+        const getTotal = () => {
+            const total = cart[0].reduce((prev, item) => {
+                return prev + (item.price * item.quantity)
+                
+            }, 0)
+
+
+            setTotal(total)
+        }
+        getTotal()
+
+    }, [])
 
     if(cart[0].length === 0) 
     return <h2 style={{textAlign: "center", fontSize: "5rem"}}>Cart Empty</h2> 
