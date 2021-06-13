@@ -1,5 +1,5 @@
 const Users = require('../models/userModel');
-// const { use } = require('../routes/userRouter');
+const { use } = require('../routes/userRouter');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
@@ -104,6 +104,20 @@ getUser: async(req, res) => {
         res.json(user)
     } catch (error) {
         res.status(500).json({msg: error.msg})
+    }
+},
+addCart: async(req, res) => {
+    try {
+        const user = await Users.findById(req.user.id)
+        console.log("HERE2: " + req.user.id)
+        if(!user) return res.status(400).json({msg: "User does not exist"})
+
+        await Users.findOneAndUpdate({_id: req.user.id}, {
+            cart: req.body.cart
+        })
+        return res.json({msg: "Added to cart"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
     }
 }
     

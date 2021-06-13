@@ -1,11 +1,13 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {GlobalState} from '../../../GlobalState'
 import {Link} from 'react-router-dom'
+import './Cart.css'
 
 function Cart() {
 
     const state = useContext(GlobalState)
     const cart = state.UserAPI.cart
+    const [total, setTotal] = useState(0)
 
     if(cart[0].length === 0) 
     return <h2 style={{textAlign: "center", fontSize: "5rem"}}>Cart Empty</h2> 
@@ -17,24 +19,33 @@ function Cart() {
         <div>
         {
         cart[0].map(product => (
-            <div className="detail">
-            <img src={product.images.url} alt="" />
+            <div className="detail cart">
+                <img src={product.images.url} alt="" />
             <div className="box-detail">
-                <div className="row">
-                    <h2>{product.title}</h2>
-                    <h6>#: {product.product_id}</h6>
-                </div>
-                <span>$ {product.price}</span>
+                
+                <h2>{product.title}</h2>
+                <h3>$ {product.price * product.quantity}</h3>
                 <p>{product.description}</p>
                 <p>{product.content}</p>
-                <p>Sold: {product.sold}</p>
-                <Link to="/cart" className="cart">Buy Now</Link>
+
+                <div className="amount">
+                    <button> - </button>
+                    <span>{product.quantity}</span>
+                    <button> + </button>
+                </div>
+
+            
+                <div className="delete">X</div>
             
             </div>
         </div>
 
         ))
         }
+        <div className="total">
+            <h3>Total: $ {total}</h3>
+            <Link to="#!">Payment</Link>
+        </div>
 
         </div>
     )
