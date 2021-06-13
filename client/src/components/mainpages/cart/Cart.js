@@ -10,7 +10,7 @@ function Cart() {
     if(cart[0].length === 0) 
     return <h2 style={{textAlign: "center", fontSize: "5rem"}}>Cart Empty</h2> 
 
-    console.log(cart[0].length)
+    console.log(cart.length)
         
 
     return (
