@@ -21,6 +21,7 @@ function DetailProduct() {
     },[params.id, products])
 
     if(detailProduct.length === 0) return null;
+    console.log(detailProduct)
     
     return (
         <>

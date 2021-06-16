@@ -26,7 +26,7 @@ function Cart() {
 
     },[cart])
 
-    const addToCart = async () => {
+    const addToCart = async (cart) => {
         await axios.patch('/user/addcart', {cart}, {
             headers: {Authorization: token }
         })
@@ -42,7 +42,7 @@ function Cart() {
             }
         });
         setCart([...cart])
-        addToCart()
+        addToCart(cart)
     }
 
     const decrement = (id) => {
@@ -52,7 +52,7 @@ function Cart() {
             }
         });
         setCart([...cart])
-        addToCart()
+        addToCart(cart)
     }
 
     const removeProduct = id => {
@@ -63,7 +63,7 @@ function Cart() {
                 }
             })
             setCart([...cart])
-            addToCart()
+            addToCart(cart)
         }
     }
 
@@ -76,7 +76,7 @@ function Cart() {
 
         //resets cart to none after buying
         setCart([])
-
+        addToCart([])
         alert("You have successfully placed an order. ")
     }
 
