@@ -1,6 +1,7 @@
 const Users = require('../models/userModel');
 const { use } = require('../routes/userRouter');
 const bcrypt = require('bcrypt')
+const Payments = require('../models/paymentModel')
 const jwt = require('jsonwebtoken')
 
 //user controller for authentication
@@ -116,6 +117,14 @@ addCart: async(req, res) => {
             cart: req.body.cart
         })
         return res.json({msg: "Added to cart"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+history: async(req, res) => {
+    try {
+        const history = await Payments.find({user_id: req.user.id})
+        res.json(history)
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }

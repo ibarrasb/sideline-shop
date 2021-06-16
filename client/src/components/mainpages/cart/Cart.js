@@ -9,6 +9,7 @@ function Cart() {
     const state = useContext(GlobalState)
     const [cart, setCart] = state.UserAPI.cart
     const [token] = state.token
+    const [callback, setCallback] = state.UserAPI.callback
     const [total, setTotal] = useState(0)
 
 
@@ -68,7 +69,6 @@ function Cart() {
     }
 
     const tranSuccess = async(payment) => {
-        console.log(payment)
         const {paymentID, address} = payment;
         await axios.post('/api/payment', {cart, paymentID, address}, {
             headers: {Authorization: token}
@@ -78,6 +78,7 @@ function Cart() {
         setCart([])
         addToCart([])
         alert("You have successfully placed an order. ")
+        setCallback(!callback)
     }
 
 
