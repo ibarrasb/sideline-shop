@@ -23,6 +23,8 @@ const paymentCtrl = {
                 user_id: _id, name, email, cart, paymentID, address
             })
 
+            console.log(newPayment)
+
             res.json({newPayment})
 
         } catch (err) {
