@@ -62,7 +62,7 @@ function Header() {
 
         </ul>
         {
-            isAdmin ? '' :
+            !isLogged || isAdmin ? '' :
              <div className="cart-icon">
 
             <span>{cart.length}</span>
