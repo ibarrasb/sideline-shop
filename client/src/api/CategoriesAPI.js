@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 
 function CategoriesAPI() {
+
+    //admin able to create categories from user profile
     const [categories, setCategories] = useState([])
 
     useEffect(() => {
