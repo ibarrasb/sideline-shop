@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function Categories() {
     const state = useContext(GlobalState)
-    const [categories, setCategories] = state.CategoriesAPI.categories
+    const [categories] = state.CategoriesAPI.categories
     const [category, setCategory] = useState('')
     const [token] = state.token
     const [callback ,setCallback] = state.CategoriesAPI.callback
