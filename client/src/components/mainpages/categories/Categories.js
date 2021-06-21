@@ -8,17 +8,57 @@ function Categories() {
     const [categories, setCategories] = state.CategoriesAPI.categories
     const [category, setCategory] = useState('')
     const [token] = state.token
-    const createCategory = async e =>{
+    const [callback ,setCallback] = state.CategoriesAPI.callback
+    const [onEdit, setOnEdit] = useState(false)
+    const [id, setID] = useState('')
+    
+const createCategory = async e =>{
         e.preventDefault()
+
         try {
+
+        if(onEdit){
+            const res = await axios.put(`/api/category/${id}`, {name: category},{
+                headers: {Authorization: token}
+            })
+
+            alert(res.data.msg)
+
+        } else{
+
             const res = await axios.post('/api/category', {name: category},{
                 headers: {Authorization: token}
             })
-            console.log(res)
+
+            alert(res.data.msg)
+
+        }
+        setOnEdit(false)
+        setCategory('')
+        setCallback(!callback)
+
         } catch (error) {
             alert(error.response.data.msg)
         }
+}
+
+const editCategory = async (id, name) =>{
+    setID(id)
+    setCategory(name)
+    setOnEdit(true)
+}
+
+const deleteCategory = async id =>{
+    try {
+        const res = await axios.delete(`/api/category/${id}`, {
+            headers: {Authorization: token}
+        })
+        alert(res.data.msg)
+        setCallback(!callback)
+    } catch (error) {
+        alert(error.response.data.msg)
     }
+}
 
     return (
         <div className="categories">
@@ -27,7 +67,7 @@ function Categories() {
                 <input type="text" name="category" value={category} required
                 onChange={e => setCategory(e.target.value)}/>
 
-                <button type="submit">Save</button>
+                <button type="submit">{onEdit ? "Update" : "Save"}</button>
             </form>
 
             <div className="col">
@@ -36,8 +76,8 @@ function Categories() {
                             <div className="row" key={category._id }>
                                 <p>{category.name}</p>
                                 <div>
-                                    <button>Edit</button>
-                                    <button>Delete</button>
+                                    <button onClick={() => editCategory(category._id, category.name)}>Edit</button>
+                                    <button onClick={() => deleteCategory(category._id)}>Delete</button>
                                 </div>
                             </div>
                         ))
