@@ -1,7 +1,8 @@
 module.exports = {
     devServer: {
-     allowedHosts: [
-      'https://sideline-shop.herokuapp.com'
-       ]
-      }
-    };
+
+    allowedHosts: [
+    'https://sideline-shop.herokuapp.com'
+    ]
+    }
+};
