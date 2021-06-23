@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import axios from 'axios'
 import {GlobalState} from '../../../GlobalState'
 import Loading from '../utils/loading/Loading'
+import {useHistory, useParams} from 'react-router-dom'
 import './create.css'
 
 const initialState = {
@@ -22,8 +23,33 @@ function createProduct() {
     const [category] = state.CategoriesAPI.categories
     const [images, setImages] = useState(false)
     const [loading, setLoading] = useState(false)
+
     const [isAdmin] = state.UserAPI.isAdmin
     const [token] = state.token
+
+    const history = useHistory()
+    const param = useParams()
+
+    const [products] = state.ProductsAPI.products
+    const [onEdit, setOnEdit] = useState(false)
+    const [callback, setCallback] = state.ProductsAPI.callback
+
+
+    useEffect(() => {
+        if(param.id){
+            setOnEdit(true)
+            products.forEach(product => {
+                if(product._id === param.id) {
+                    setProduct(product)
+                    setImages(product.images)
+                }
+            })
+        }else{
+            setOnEdit(false)
+            setProduct(initialState)
+            setImages(false)
+        }
+    }, [param.id, products])
 
 
 
@@ -74,6 +100,28 @@ function createProduct() {
         setProduct({...product, [name]:value })
     }
 
+    const handleSubmit = async e =>{
+        e.preventDefault()
+        try {
+            if(!isAdmin) alert("You're not an Admin")
+            if(!images) alert("No image uploaded")
+            if(onEdit){
+                await axios.put(`/api/products/${product._id}`, {...product, images}, {
+                    headers: {Authorization: token}
+                })
+            }else{
+                await axios.post('/api/products', {...product, images}, {
+                    headers: {Authorization: token}
+                })
+            }
+            setCallback(!callback)
+            history.push("/")
+            
+        } catch (err) {
+            alert(err.response.data.msg)
+        }
+    }
+
     const styleUpload = {
         display: images ? "block" : "none"
     }
@@ -93,11 +141,11 @@ function createProduct() {
                 }
                 
             </div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="row">
                     <label htmlFor="product_id"> Product ID</label>
                     <input type="text" name="product_id" id="product_id" required
-                    value={product.product_id} onChange={handleChangeInput}/>
+                    value={product.product_id} onChange={handleChangeInput} disabled={onEdit}/>
                 </div>
 
                 <div className="row">
@@ -137,7 +185,7 @@ function createProduct() {
                         }
                     </select>
                 </div>
-                        <button type="submit">Create</button>
+                        <button type="submit">{onEdit? "Update" : "Create"}</button>
             </form>
         </div>
     );
