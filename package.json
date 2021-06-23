@@ -3,40 +3,32 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "homepage": "https://sideline-shop.herokuapp.com/",
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "cloudinary": "^1.25.1",
-    "concurrently": "^6.0.2",
-    "cookie-parser": "^1.4.5",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-fileupload": "^1.2.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.5",
-    "nodemon": "^2.0.7"
-  },
-  "devDependencies": {},
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start": "node server.js",
     "server": "nodemon server.js",
-    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
-    "build": "cd client && npm run build",
     "server-install": "npm install",
     "client-install": "cd client && npm install",
     "install-all": "concurrently \"npm run server-install\" \"npm run client-install\"",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ibarrasb/sideline-shop.git"
-  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ibarrasb/sideline-shop/issues"
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cloudinary": "^1.23.0",
+    "concurrently": "^5.3.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }

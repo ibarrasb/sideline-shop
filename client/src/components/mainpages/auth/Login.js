@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
-import './login.css'
 
 function Login() {
     const [user, setUser] = useState({
@@ -16,8 +15,10 @@ function Login() {
     const loginSubmit = async e =>{
         e.preventDefault()
         try {
-            await axios.post('/user/login', {...user}) 
-            localStorage.setItem('firstlogin', true)
+            await axios.post('/user/login', {...user})
+
+            localStorage.setItem('firstLogin', true)
+            
             window.location.href = "/";
         } catch (err) {
             alert(err.response.data.msg)

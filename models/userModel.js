@@ -9,23 +9,22 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true,
+        unique: true
     },
     password: {
         type: String,
-        required: true,
+        required: true
     },
     role: {
         type: Number,
         default: 0
     },
     cart: {
-        type: Array, 
+        type: Array,
         default: []
     }
-},{
-    timestamps: true 
-
+}, {
+    timestamps: true
 })
 
 module.exports = mongoose.model('Users', userSchema)

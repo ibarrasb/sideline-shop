@@ -6,7 +6,7 @@ export default class PaypalButton extends React.Component {
         const onSuccess = (payment) => {
             // Congratulation, it came here means everything's fine!
             		console.log("The payment was succeeded!", payment);
-            		// You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
+                    // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
                     this.props.tranSuccess(payment)
         }
  
@@ -29,7 +29,7 @@ export default class PaypalButton extends React.Component {
         // Document on Paypal's currency code: https://developer.paypal.com/docs/classic/api/currency_codes/
  
         const client = {
-            sandbox:    'AaROMF7p4f6cc0UohWDTVGP7N0KxrCDIFvMn8xqytq89jmrUfdAXLf3aMnbYzmujfLxagdneUsB6LyLl',
+            sandbox:    'YOUR-sandbox-APP-ID',
             production: 'YOUR-PRODUCTION-APP-ID',
         }
         // In order to get production's app-ID, you will have to send your app to Paypal for approval first
@@ -39,7 +39,6 @@ export default class PaypalButton extends React.Component {
         //   => https://developer.paypal.com/docs/classic/lifecycle/goingLive/
  
         // NB. You can also have many Paypal express checkout buttons on page, just pass in the correct amount and they will work!
-
         let style = {
             size: 'small',
             color: 'blue',
@@ -49,7 +48,12 @@ export default class PaypalButton extends React.Component {
         }
 
         return (
-            <PaypalExpressBtn env={env} client={client} currency={currency} total={total} onError={onError} onSuccess={onSuccess} onCancel={onCancel} style={style} />
+            <PaypalExpressBtn 
+            env={env} client={client} 
+            currency={currency} 
+            total={total} onError={onError} 
+            onSuccess={onSuccess} onCancel={onCancel}
+            style={style} />
         );
     }
 }

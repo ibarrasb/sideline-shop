@@ -1,14 +1,11 @@
-
-
 .load-page{
-    background: none;
+    background: #fff;
     overflow: hidden;
 }
 .loader{
     width: 300px;
     height: 300px;
     margin: auto;
-    background: none;
 }
 .loader div{
     width: calc(100% - 15px);
@@ -17,7 +14,6 @@
     border-top: 2px solid crimson;
     border-radius: 50%;
     animation: rotate 10s linear infinite alternate-reverse;
-    background: none;
 }
 @keyframes rotate{
     50%{

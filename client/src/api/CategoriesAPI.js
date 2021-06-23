@@ -1,24 +1,22 @@
-import axios from 'axios';
-import {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react'
+import axios from 'axios'
 
 function CategoriesAPI() {
-
-    //admin able to create categories from user profile
     const [categories, setCategories] = useState([])
-    const [callback ,setCallback] = useState(false)
+    const [callback, setCallback] = useState(false)
 
-    useEffect(() => {
-        const getCategories = async() => {
+    useEffect(() =>{
+        const getCategories = async () =>{
             const res = await axios.get('/api/category')
             setCategories(res.data)
         }
-        getCategories()
-    }, [callback])
 
+        getCategories()
+    },[callback])
     return {
         categories: [categories, setCategories],
-        callback: [callback ,setCallback]
+        callback: [callback, setCallback]
     }
 }
 
-export default CategoriesAPI;
+export default CategoriesAPI
