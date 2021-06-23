@@ -6,6 +6,7 @@
 ## Description
 
 Sideline shop is a e-commerce inspired web application that is based on sports. The application has several features that were implemented such as Authentication using JWT, Paypal checkout, a cart component, and ability to view previous purchases. Along with JWT, there is also an admin feature, which allows the user to create, read, update, and delete posts, also with the ability to view every purchase every made on the web app.
+[Click Here](https://sideline-shop.herokuapp.com) to launch App!
 
 ## ADMIN LOGIN
 Use the admin credentials to create, delete, update, or view any product, or you can make your own account to be able to test the shop for yourself
