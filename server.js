@@ -6,7 +6,7 @@ const fileUpload = require('express-fileupload')
 const cookieParser = require('cookie-parser')
 const path = require('path')
 
-
+//express app middleware
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
@@ -15,7 +15,7 @@ app.use(fileUpload({
     useTempFiles: true
 }))
 
-// Routes
+// User and API Routes
 app.use('/user', require('./routes/userRouter'))
 app.use('/api', require('./routes/categoryRouter'))
 app.use('/api', require('./routes/upload'))
@@ -36,6 +36,7 @@ mongoose.connect(URI, {
     console.log('Connected to MongoDB')
 })
 
+//Build for Heroku
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'))
     app.get('*', (req, res) => {
@@ -44,7 +45,7 @@ if(process.env.NODE_ENV === 'production'){
 }
 
 
-
+//Starts server 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () =>{
     console.log('Server is running on port', PORT)
