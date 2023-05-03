@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import {GlobalState} from '../../../GlobalState'
-import ProductItem from '../utils/productItem/ProductItem'
+import ProductItem from '../utils/productitem/ProductItem'
 import Loading from '../utils/loading/Loading'
 import axios from 'axios'
 import Filters from './Filters'

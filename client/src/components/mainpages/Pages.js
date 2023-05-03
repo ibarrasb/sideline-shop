@@ -9,7 +9,7 @@ import OrderDetails from './history/OrderDetails'
 import Cart from './cart/Cart'
 import NotFound from './utils/not_found/NotFound'
 import Categories from './categories/Categories'
-import CreateProduct from './createProduct/CreateProduct'
+import CreateProduct from './createProduct/createProduct'
 
 import {GlobalState} from '../../GlobalState'
 
